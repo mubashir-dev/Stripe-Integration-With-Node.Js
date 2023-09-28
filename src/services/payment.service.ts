@@ -7,7 +7,7 @@ import { stripe } from "../common/stripe";
 
 
 export async function stripePaymentLink(req: Request, res: Response, next: NextFunction) {
-    const { jwtPayload } = res.locals.USER_DATA;
+    const { id } = res.locals.USER_DATA;
     const { courseId } = req.body;
 
     const course = await courseModel.findOne({ _id: courseId });
@@ -31,7 +31,7 @@ export async function stripePaymentLink(req: Request, res: Response, next: NextF
     //create stripe customer
     const customer = await stripe.customers.create({
         metadata: {
-            userId: jwtPayload,
+            userId: id,
             cart: JSON.stringify(courseItem)
         }
     });

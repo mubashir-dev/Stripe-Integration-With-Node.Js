@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import * as JWT from "jsonwebtoken";
 import { jwtConfig } from "../config";
-import { token } from "morgan";
 
 export const generateAccessToken = (user: any): Promise<void | string> => {
     return new Promise((resolve, reject) => {
-        const jwtPayload: any = user;
+        // const jwtPayload: any = user;
+        // console.log("🚀 ~ file: jwt.service.ts:8 ~ returnnewPromise ~ jwtPayload:", jwtPayload)
         const options = {
             expiresIn: jwtConfig.timeout,
             issuer: "test.com",
         };
-        JWT.sign({ jwtPayload }, jwtConfig.secret as string, options, (error, token) => {
+        JWT.sign(user, jwtConfig.secret as string, options, (error, token) => {
             if (error) {
                 reject("JWT access token has not been issued");
                 return;
@@ -22,13 +22,12 @@ export const generateAccessToken = (user: any): Promise<void | string> => {
 
 export const generateRefreshToken = (user: any): Promise<void | string> => {
     return new Promise((resolve, reject) => {
-        const jwtPayload = user;
         const options = {
             expiresIn: jwtConfig.timeout,
             issuer: "test.com",
         };
         JWT.sign(
-            { jwtPayload },
+            user,
             jwtConfig.secret!,
             options,
             (error, token) => {

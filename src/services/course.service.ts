@@ -5,7 +5,7 @@ import { AggregateOptions, Schema } from "mongoose";
 import { Types } from 'mongoose';
 
 export async function store(req: Request, res: Response, next: NextFunction) {
-    const { jwtPayload } = res.locals.USER_DATA;
+    const { id } = res.locals.USER_DATA;
     const { title } = req.body;
 
     //check if the course is already created
@@ -16,15 +16,20 @@ export async function store(req: Request, res: Response, next: NextFunction) {
     const course = new courseModel({
         ...req.body
     });
-    course.userId = jwtPayload;
+    course.userId = id;
     const courseData = await course.save();
     return courseData;
 }
 
 async function aggregateCourse(findOptions?: any) {
-    const findQuery = findOptions && { _id: new Types.ObjectId(findOptions.id) };
+    let findQuery = {};
+    findQuery = findOptions && { _id: new Types.ObjectId(findOptions.id) };
     const data = await courseModel.aggregate([
-        findQuery && { $match: findQuery },
+        {
+            $match: {
+                ...findQuery
+            }
+        },
         {
             $lookup: {
                 from: "users",
@@ -58,9 +63,7 @@ async function aggregateCourse(findOptions?: any) {
                 "updatedAt": 1
             }
         },
-        findQuery && { $limit: 1 },
     ]);
-
     return data;
 }
 
@@ -70,12 +73,6 @@ export async function find(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function findOne(req: Request, res: Response, next: NextFunction) {
-    const data = await aggregateCourse({ id: req.params.id }); 
-    if (!data) return apiResponse({
-        response: res,
-        message: "Course not found",
-        code: 404,
-    });
+    const data = await aggregateCourse({ id: req.params.id });
     return data;
-
 }

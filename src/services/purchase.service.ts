@@ -8,13 +8,13 @@ import { ObjectId, Types } from "mongoose";
 
 
 export async function purchaseCourse(req: Request, res: Response, next: NextFunction) {
-    const { jwtPayload } = res.locals.USER_DATA;
+    const { id } = res.locals.USER_DATA;
     const { courseId, sessionId } = req.body;
 
     //course  & already purchased check
     const [courseExists, coursePurchase] = await Promise.all([
         courseModel.findOne({ _id: courseId }),
-        coursePurchaseModel.findOne({ courseId, userId: jwtPayload })
+        coursePurchaseModel.findOne({ courseId, userId: id })
     ]);
 
     //check for session id 
@@ -32,7 +32,7 @@ export async function purchaseCourse(req: Request, res: Response, next: NextFunc
     //save purchase & generate stripe payment link
     const coursePurchaseData = coursePurchaseModel.create({
         courseId,
-        userId: jwtPayload,
+        userId: id,
         amount: payment.amount_total,
         currency: payment.currency,
         sessionId: payment.id,
@@ -44,12 +44,15 @@ export async function purchaseCourse(req: Request, res: Response, next: NextFunc
 }
 
 async function aggregatePurchase(findOptions?: any) {
-    const { jwtPayload } = findOptions;
-    const findQuery = findOptions && { _id: new Types.ObjectId(findOptions.id) };
+    const { userId } = findOptions;
+    let findQuery = {
+        userId: new Types.ObjectId(userId),
+    }
+    findQuery = findOptions?.id && { ...findQuery, _id: new Types.ObjectId(findOptions.id) };
     const data = await coursePurchaseModel.aggregate([
         {
             $match: {
-                userId: new Types.ObjectId(jwtPayload)
+                ...findQuery
             }
         },
         {
@@ -100,15 +103,13 @@ async function aggregatePurchase(findOptions?: any) {
 
 
 export async function purchaseList(req: Request, res: Response, next: NextFunction) {
-    const { jwtPayload } = res.locals.USER_DATA;
-    const data = await aggregatePurchase({ jwtPayload });
+    const { id } = res.locals.USER_DATA;
+    const data = await aggregatePurchase({ userId: id });
     return data;
 }
 
 export async function purchaseDetails(req: Request, res: Response, next: NextFunction) {
-    const { jwtPayload } = res.locals.USER_DATA;
     const { id } = req.params;
-    const data = await aggregatePurchase({ jwtPayload, id });
-    if(!data) return apiResponse({response:res,message:"Course purchase details not found"})
-    return data.at(0);
+    const data = await aggregatePurchase({ userId: res.locals.USER_DATA.id, id });
+    return data;
 }
