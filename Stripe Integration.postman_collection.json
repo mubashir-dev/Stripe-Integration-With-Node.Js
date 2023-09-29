@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "6567d1f7-a07b-4bba-a594-9ae65132731e",
+		"name": "Stripe Integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9575943"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign-In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"ahmeasda@gmail.com\",\n    \"password\":\"1234678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/auth/sign-in",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign-Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"ali\",\n    \"email\":\"ahmeaasssdssssa@sgmail.com\",\n    \"password\":\"1234678\",\n    \"confirm_password\":\"1234678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/auth/sign-up",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current-User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTMzNmI3ZDg2ZDNjNGVmYmEzZTBlYSIsImlhdCI6MTY5NTkxNDEyNCwiZXhwIjoxNjk1OTUwMTI0LCJpc3MiOiJ0ZXN0LmNvbSJ9.Wp1BSdAaoanMjDGAakNgoWZFDA-jPnW4YX8YDqvMkok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/auth/current-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"current-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "System Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/app/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"app",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RQYXlsb2FkIjoiNjUxMzM2YjdkODZkM2M0ZWZiYTNlMGVhIiwiaWF0IjoxNjk1ODI0MTU3LCJleHAiOjE2OTU4NjAxNTcsImlzcyI6InRlc3QuY29tIn0.POtcpDWyby-aL3aeu7I7Dt6ElA9k75XJ1NCbr3G5eqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"node-baisc 101\",\n    \"description\": \"test description\",\n    \"image\": \"https://blog.visitorqueue.com/wp-content/uploads/2021/08/X-Best-Udemy-Sales-Courses-1024x669.png\",\n    \"meta\": {\n        \"currency\": \"USD\",\n        \"price\": 400\n    },\n    \"tags\": [\n        \"node\",\n        \"js\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTMzNmI3ZDg2ZDNjNGVmYmEzZTBlYSIsImlhdCI6MTY5NTkyNjc1MCwiZXhwIjoxNjk1OTYyNzUwLCJpc3MiOiJ0ZXN0LmNvbSJ9.w2WPB5QlbmjkwLOSeV4JcSUa5rwSCqJuSCf84OMp8xI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"node-baisc course\",\n    \"description\": \"test description\",\n    \"image\": \"https://blog.visitorqueue.com/wp-content/uploads/2021/08/X-Best-Udemy-Sales-Courses-1024x669.png\",\n    \"meta\": {\n        \"currency\": \"USD\",\n        \"price\": 400\n    },\n    \"tags\": [\n        \"node\",\n        \"js\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTMzNmI3ZDg2ZDNjNGVmYmEzZTBlYSIsImlhdCI6MTY5NTkxNDEyNCwiZXhwIjoxNjk1OTUwMTI0LCJpc3MiOiJ0ZXN0LmNvbSJ9.Wp1BSdAaoanMjDGAakNgoWZFDA-jPnW4YX8YDqvMkok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/course/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"course",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65146e98d96edc42a8706fa4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchase Courses",
+			"item": [
+				{
+					"name": "Purchase Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RQYXlsb2FkIjoiNjUxMzM2YjdkODZkM2M0ZWZiYTNlMGVhIiwiaWF0IjoxNjk1ODI0MTU3LCJleHAiOjE2OTU4NjAxNTcsImlzcyI6InRlc3QuY29tIn0.POtcpDWyby-aL3aeu7I7Dt6ElA9k75XJ1NCbr3G5eqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"courseId\":\"65146e98d96edc42a8706fa2\",\n    \"sessionId\":\"cs_test_b1dRagsCxUyU9Fui4Xu2p1W8iXorEbBkPoJToLulGWZ0tTKOXtc8DZBgFf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/purchase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchases Courses List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTMzNmI3ZDg2ZDNjNGVmYmEzZTBlYSIsImlhdCI6MTY5NTkyNjc1MCwiZXhwIjoxNjk1OTYyNzUwLCJpc3MiOiJ0ZXN0LmNvbSJ9.w2WPB5QlbmjkwLOSeV4JcSUa5rwSCqJuSCf84OMp8xI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"node-baisc course\",\n    \"description\": \"test description\",\n    \"image\": \"https://blog.visitorqueue.com/wp-content/uploads/2021/08/X-Best-Udemy-Sales-Courses-1024x669.png\",\n    \"meta\": {\n        \"currency\": \"USD\",\n        \"price\": 400\n    },\n    \"tags\": [\n        \"node\",\n        \"js\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/purchase/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"purchase",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase Course Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTMzNmI3ZDg2ZDNjNGVmYmEzZTBlYSIsImlhdCI6MTY5NTkyNzkzMiwiZXhwIjoxNjk1OTYzOTMyLCJpc3MiOiJ0ZXN0LmNvbSJ9.fuS1j-8KsEsIPY8dPyvPpZtAh5oPspzRlFU7pLTBrt8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/purchase/list/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"purchase",
+								"list",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6514bcac266026aba75c381p"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Generate Payment Link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RQYXlsb2FkIjoiNjUxMzM2YjdkODZkM2M0ZWZiYTNlMGVhIiwiaWF0IjoxNjk1ODI0MTU3LCJleHAiOjE2OTU4NjAxNTcsImlzcyI6InRlc3QuY29tIn0.POtcpDWyby-aL3aeu7I7Dt6ElA9k75XJ1NCbr3G5eqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"courseId\":\"65146e98d96edc42a8706fa2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/stripe/checkout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stripe",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Payment Link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RQYXlsb2FkIjoiNjUxMzM2YjdkODZkM2M0ZWZiYTNlMGVhIiwiaWF0IjoxNjk1ODI0MTU3LCJleHAiOjE2OTU4NjAxNTcsImlzcyI6InRlc3QuY29tIn0.POtcpDWyby-aL3aeu7I7Dt6ElA9k75XJ1NCbr3G5eqA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/stripe/checkout/details/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stripe",
+								"checkout",
+								"details",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "cs_test_b1dRagsCxUyU9Fui4Xu2p1W8iXorEbBkPoJToLulGWZ0tTKOXtc8DZBgFf"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
