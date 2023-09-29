@@ -9,7 +9,7 @@ mainRouter.use(`/api/v1`, versionRouter);
 //versionRouter
 versionRouter.use('/auth', authRouter);
 versionRouter.use('/course', courseRouter);
-versionRouter.use('/course/purchase', purchaseRouter);
+versionRouter.use('/purchase', purchaseRouter);
 versionRouter.use('/stripe', paymentRouter);
 mainRouter.use('/app', appRouter);
 

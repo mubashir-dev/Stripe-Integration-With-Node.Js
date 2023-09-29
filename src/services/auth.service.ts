@@ -22,7 +22,7 @@ export async function register(req: Request, res: Response, next: NextFunction) 
     const hashedPassword = await passwordUtil.encrypt(password, salt);
     user.salt = salt;
     user.password = hashedPassword;
-    const userSave = await user.save();    
+    const userSave = await user.save();
     //serialize the user
     const serializedUser = await serializeUser(userSave);
     return {
@@ -48,8 +48,8 @@ export async function signIn(req: Request, res: Response, next: NextFunction) {
 
     //generate jwt tokens
     const [accessToken, refreshToken]: string | any = await Promise.all([
-        jwtService.generateAccessToken(user._id),
-        jwtService.generateRefreshToken(user._id),
+        jwtService.generateAccessToken({ id: user._id }),
+        jwtService.generateRefreshToken({ id: user._id }),
     ]);
 
     //serialize user

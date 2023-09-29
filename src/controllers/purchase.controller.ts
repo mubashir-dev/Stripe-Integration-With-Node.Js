@@ -31,9 +31,13 @@ export async function purchaseList(req: Request, res: Response, next: NextFuncti
 export async function purchaseDetails(req: Request, res: Response, next: NextFunction) {
     try {
         const data = await purchaseService.purchaseDetails(req, res, next);
+        if (data.at(0) == undefined) {
+            apiResponse({ response: res, message: "Course purchase details not found" });
+            return;
+        }
         return apiResponse({
             response: res,
-            result: data,
+            result: data.at(0),
         });
     } catch (error) {
         next(error);

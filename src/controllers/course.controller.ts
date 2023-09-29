@@ -30,9 +30,14 @@ export async function findAll(req: Request, res: Response, next: NextFunction) {
 export async function findOne(req: Request, res: Response, next: NextFunction) {
     try {
         const data = await courseService.findOne(req, res, next);
+        if (data.at(0) == undefined) return apiResponse({
+            response: res,
+            message: "Course not found",
+            code: 404,
+        });
         return apiResponse({
             response: res,
-            result: data,
+            result: data.at(0),
         });
     } catch (error) {
         next(error);
