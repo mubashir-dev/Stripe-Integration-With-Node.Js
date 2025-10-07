@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.paymentRouter = exports.purchaseRouter = exports.courseRouter = exports.authRouter = exports.appRouter = void 0;
+var app_routes_1 = require("./app.routes");
+Object.defineProperty(exports, "appRouter", { enumerable: true, get: function () { return app_routes_1.appRouter; } });
+var auth_routes_1 = require("./auth.routes");
+Object.defineProperty(exports, "authRouter", { enumerable: true, get: function () { return auth_routes_1.authRouter; } });
+var course_routes_1 = require("./course.routes");
+Object.defineProperty(exports, "courseRouter", { enumerable: true, get: function () { return course_routes_1.courseRouter; } });
+var purchase_routes_1 = require("./purchase.routes");
+Object.defineProperty(exports, "purchaseRouter", { enumerable: true, get: function () { return purchase_routes_1.purchaseRouter; } });
+var payment_routes_1 = require("./payment.routes");
+Object.defineProperty(exports, "paymentRouter", { enumerable: true, get: function () { return payment_routes_1.paymentRouter; } });

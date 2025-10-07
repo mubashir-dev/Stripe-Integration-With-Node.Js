@@ -6,7 +6,8 @@ import { Request, Response, NextFunction } from 'express';
 import { errorHandler, requestLogger } from "./middlewares";
 import mainRouter from "./routes/api.routes";
 import { connectDatabase } from "./database/connection";
-
+import { swaggerSpec } from './swagger';
+import swaggerUi from 'swagger-ui-express';
 
 const app = express();
 app.use(express.json(), express.urlencoded({ extended: true }));
@@ -14,6 +15,9 @@ app.use((req: Request, res: Response, next: NextFunction) => requestLogger(req, 
 app.use(cors());
 app.set("trust proxy", true);
 app.use(mainRouter);
+
+//swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //404 
 app.use('*', (req: Request, res: Response, next: NextFunction) => {
